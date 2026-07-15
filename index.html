@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Skunkworks Academy Publish | Course Production Workspace</title>
+  <meta name="description" content="Plan, produce, review and release enterprise learning content with governed teams, project stages, time tracking and release controls." />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
+  <link rel="canonical" href="https://publish.skunkworksacademy.com/" />
+  <link rel="icon" href="https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-white.png" media="(prefers-color-scheme: dark)" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <picture>
+          <source srcset="https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-white.png" media="(prefers-color-scheme: dark)" />
+          <img src="https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png" alt="" />
+        </picture>
+        <span>Skunkworks Academy <small>Publish</small></span>
+      </a>
+      <button id="navToggle" class="icon-button" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle navigation">☰</button>
+      <nav id="siteNav" class="site-nav" aria-label="Academy navigation">
+        <a href="https://skunkworksacademy.com/">Home</a>
+        <a href="https://portal.skunkworksacademy.com/">Portal</a>
+        <a href="https://labs.skunkworksacademy.com/">Labs</a>
+        <a href="https://jobs.skunkworksacademy.com/">Jobs</a>
+        <a href="https://docs.skunkworksacademy.com/">Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="productView" class="hero shell">
+      <div>
+        <p class="eyebrow">Course production operating system</p>
+        <h1>Move learning content from brief to governed release.</h1>
+        <p class="lead">Coordinate teams, stages, hours, assets, approvals and releases in one workspace designed for enterprise course development.</p>
+        <div class="actions">
+          <button id="signInButton" class="button primary" type="button">Sign in with Microsoft</button>
+          <a class="button secondary" href="#capabilities">Explore capabilities</a>
+        </div>
+        <p class="helper">MVP authentication is simulated. The production adapter will use Microsoft Entra ID and tenant-aware entitlement checks.</p>
+      </div>
+      <aside class="hero-panel" aria-label="Publishing workflow summary">
+        <div><strong>01</strong><span>Choose organisation and team</span></div>
+        <div><strong>02</strong><span>Create a governed course project</span></div>
+        <div><strong>03</strong><span>Track stages, hours and assets</span></div>
+        <div><strong>04</strong><span>Approve and record a release</span></div>
+      </aside>
+    </section>
+
+    <section id="capabilities" class="shell section-block">
+      <p class="eyebrow">Platform scope</p>
+      <h2>One production workspace, built around evidence.</h2>
+      <div class="feature-grid">
+        <article><h3>Team workspaces</h3><p>Separate organisations, teams, roles and projects using a tenant-aware access model.</p></article>
+        <article><h3>Stage governance</h3><p>Progress through intake, design, development, review, QA, pilot and release gates.</p></article>
+        <article><h3>Time and cost evidence</h3><p>Log hours by contributor, activity and project stage for margin and delivery reporting.</p></article>
+        <article><h3>Asset register</h3><p>Track course files, links, ownership, review status and release inclusion.</p></article>
+        <article><h3>Release readiness</h3><p>Record approval evidence and prevent publication while required gates remain incomplete.</p></article>
+        <article><h3>Enterprise integration</h3><p>Designed for Entra ID, Azure SQL, Blob Storage, GitHub, Teams and Power BI integration.</p></article>
+      </div>
+    </section>
+
+    <section id="workspaceView" class="workspace shell" hidden>
+      <div class="workspace-head">
+        <div>
+          <p class="eyebrow">Authenticated workspace</p>
+          <h1>Publishing control centre</h1>
+          <p id="identitySummary" class="lead compact"></p>
+        </div>
+        <button id="signOutButton" class="button secondary" type="button">Sign out</button>
+      </div>
+
+      <div class="onboarding-grid">
+        <section class="panel">
+          <h2>1. Organisation and team</h2>
+          <label for="organisationSelect">Organisation</label>
+          <select id="organisationSelect">
+            <option value="Skunkworks Academy">Skunkworks Academy</option>
+            <option value="Demo Customer Tenant">Demo Customer Tenant</option>
+          </select>
+          <label for="teamSelect">Publishing team</label>
+          <select id="teamSelect">
+            <option value="Course Development Team">Course Development Team</option>
+            <option value="Faculty and SMEs">Faculty and SMEs</option>
+            <option value="Media Production">Media Production</option>
+          </select>
+          <p class="helper">Production: organisations and teams will resolve from application tenant memberships and Entra groups.</p>
+        </section>
+
+        <section class="panel">
+          <h2>2. Create project</h2>
+          <label for="projectName">Project name</label>
+          <input id="projectName" type="text" value="Publishing MVP Course" />
+          <label for="projectOwner">Project owner</label>
+          <input id="projectOwner" type="text" value="Raydo Matthee" />
+          <label for="projectTemplate">Template</label>
+          <select id="projectTemplate">
+            <option>Instructor-led course</option>
+            <option>Self-paced course</option>
+            <option>Certification readiness programme</option>
+            <option>Microlearning series</option>
+          </select>
+          <button id="createProjectButton" class="button primary" type="button">Create project workspace</button>
+        </section>
+      </div>
+
+      <section id="projectWorkspace" hidden>
+        <div class="metric-grid">
+          <article class="metric"><span>Project</span><strong id="metricProject">—</strong></article>
+          <article class="metric"><span>Current stage</span><strong id="metricStage">Intake</strong></article>
+          <article class="metric"><span>Logged hours</span><strong id="metricHours">0.0</strong></article>
+          <article class="metric"><span>Release readiness</span><strong id="metricReadiness">14%</strong></article>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="panel span-2">
+            <div class="panel-heading"><div><p class="eyebrow">Production stages</p><h2>Stage board</h2></div><button id="advanceStageButton" class="button secondary" type="button">Advance stage</button></div>
+            <ol id="stageList" class="stage-list"></ol>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Time evidence</p>
+            <h2>Log time</h2>
+            <label for="timeActivity">Activity</label>
+            <input id="timeActivity" type="text" placeholder="Example: Module outline review" />
+            <label for="timeHours">Hours</label>
+            <input id="timeHours" type="number" min="0.25" step="0.25" value="1" />
+            <button id="addTimeButton" class="button primary" type="button">Add time entry</button>
+            <ul id="timeEntries" class="record-list"></ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Asset register</p>
+            <h2>Add course asset</h2>
+            <label for="assetName">Asset name</label>
+            <input id="assetName" type="text" placeholder="Example: learner-guide.docx" />
+            <label for="assetType">Asset type</label>
+            <select id="assetType"><option>Courseware</option><option>Slides</option><option>Lab</option><option>Assessment</option><option>Media</option></select>
+            <button id="addAssetButton" class="button primary" type="button">Register asset</button>
+            <ul id="assetEntries" class="record-list"></ul>
+          </section>
+
+          <section class="panel span-2">
+            <div class="panel-heading"><div><p class="eyebrow">Release governance</p><h2>Readiness checklist</h2></div><span id="releaseBadge" class="badge">Not ready</span></div>
+            <div id="checklist" class="checklist"></div>
+            <button id="createReleaseButton" class="button primary" type="button" disabled>Create release record</button>
+            <p id="releaseMessage" class="status" aria-live="polite"></p>
+          </section>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell"><strong>Skunkworks Academy Publish</strong><span>Dream. Design. Deliver.</span></div>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
