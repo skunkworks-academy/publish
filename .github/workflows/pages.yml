@@ -1,9 +1,9 @@
-name: Deploy publishing site
+name: Validate and deploy Publish site
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches: [main]
+  push:
     branches: [main]
   workflow_dispatch:
 
@@ -13,41 +13,38 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Validate required files
-        run: |
-          test -f index.html
-          test -f styles.css
-          test -f app.js
-          test -f CNAME
-          grep -q "publish.skunkworksacademy.com" index.html
-          grep -q "Sign in with Microsoft" index.html
-          grep -q "Publishing control centre" index.html
+
+      - name: Validate static site
+        run: python3 scripts/validate_site.py
 
   deploy:
     if: github.event_name != 'pull_request'
     needs: validate
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Configure Pages
+
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - name: Deploy to GitHub Pages
+
+      - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
