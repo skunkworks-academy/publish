@@ -5,7 +5,10 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
+LANDING = ROOT / "landing.html"
+NOT_FOUND = ROOT / "404.html"
 CNAME = ROOT / "CNAME"
+
 
 class SiteParser(HTMLParser):
     def __init__(self):
@@ -32,6 +35,7 @@ class SiteParser(HTMLParser):
         if self.in_title:
             self.title.append(data.strip())
 
+
 errors = []
 if not INDEX.exists():
     errors.append("Missing root index.html")
@@ -40,7 +44,18 @@ else:
     parser = SiteParser()
     parser.feed(html)
 
-    required_ids = {"main", "homeView", "signinView", "appView", "publicActions", "appActions", "menuButton", "sidebar", "signOut", "microsoftSignIn"}
+    required_ids = {
+        "main",
+        "homeView",
+        "signinView",
+        "appView",
+        "publicActions",
+        "appActions",
+        "menuButton",
+        "sidebar",
+        "signOut",
+        "microsoftSignIn",
+    }
     missing = sorted(required_ids - parser.ids)
     if missing:
         errors.append(f"Missing required DOM IDs: {', '.join(missing)}")
@@ -59,6 +74,14 @@ else:
     if not "".join(parser.title).strip():
         errors.append("HTML title is empty")
 
+for route_file, route_name in ((LANDING, "landing alias"), (NOT_FOUND, "404 fallback")):
+    if not route_file.exists():
+        errors.append(f"Missing {route_name}: {route_file.name}")
+        continue
+    route_html = route_file.read_text(encoding="utf-8")
+    if "/#home" not in route_html:
+        errors.append(f"{route_file.name} must route visitors to /#home")
+
 if not CNAME.exists() or CNAME.read_text(encoding="utf-8").strip() != "publish.skunkworksacademy.com":
     errors.append("CNAME must contain publish.skunkworksacademy.com")
 
@@ -72,4 +95,4 @@ if errors:
     sys.exit(1)
 
 print("Publish site validation passed.")
-print("Validated root landing page, application routes, custom domain and Pages safeguards.")
+print("Validated root landing page, explicit landing alias, route fallback, application routes, custom domain and Pages safeguards.")
