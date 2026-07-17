@@ -1,6 +1,8 @@
-name: Deploy Publish site to GitHub Pages
+name: Validate and deploy Publish site
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
@@ -11,12 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
-
-environment:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
 
 jobs:
   validate:
@@ -29,8 +27,12 @@ jobs:
         run: python3 scripts/validate_site.py
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: validate
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
