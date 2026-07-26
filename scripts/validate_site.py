@@ -55,6 +55,7 @@ else:
         "sidebar",
         "signOut",
         "microsoftSignIn",
+        "authStatus",
     }
     missing = sorted(required_ids - parser.ids)
     if missing:
@@ -66,10 +67,25 @@ else:
         "Publishing dashboard",
         "function init()",
         "init();",
+        "https://portal.skunkworksacademy.com/",
+        "https://publish.skunkworksacademy.com/#app/dashboard",
+        "buildPortalAuthUrl",
+        "window.location.assign(buildPortalAuthUrl())",
+        "returnUrl",
+        "source",
     ]
     for value in required_text:
         if value not in html:
             errors.append(f"Missing expected landing/application content: {value}")
+
+    forbidden_text = [
+        "Microsoft Entra ID connection is not configured in this static MVP",
+        "alert('",
+        'alert("',
+    ]
+    for value in forbidden_text:
+        if value in html:
+            errors.append(f"Forbidden obsolete authentication behaviour remains: {value}")
 
     if not "".join(parser.title).strip():
         errors.append("HTML title is empty")
@@ -95,4 +111,4 @@ if errors:
     sys.exit(1)
 
 print("Publish site validation passed.")
-print("Validated root landing page, explicit landing alias, route fallback, application routes, custom domain and Pages safeguards.")
+print("Validated landing, Portal authentication handoff, return routing, fallback routes, custom domain and Pages safeguards.")
